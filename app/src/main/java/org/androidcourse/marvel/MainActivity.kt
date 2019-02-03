@@ -1,8 +1,10 @@
 package org.androidcourse.marvel
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -10,13 +12,30 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.androidcourse.marvel.dummy.DummyContent
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    CharacterFragment.OnListFragmentInteractionListener,
+    ShowSingeCharacterFragment.OnFragmentInteractionListener
+{
+    override fun onFragmentInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
+    lateinit var charactersFragment:CharacterFragment
+    lateinit var showSingeCharacterFragment:ShowSingeCharacterFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        charactersFragment = CharacterFragment.newInstance()
+        showSingeCharacterFragment = ShowSingeCharacterFragment.newInstance()
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -30,6 +49,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        var characterFragment:CharacterFragment
+        var showSingleCharacterFragment:ShowSingeCharacterFragment
     }
 
     override fun onBackPressed() {
@@ -59,19 +81,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
+            R.id.nav_home -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_search_character -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, charactersFragment)
+                    .addToBackStack(charactersFragment.toString())
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
+            }
+            R.id.nav_search_comics -> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_fav_characters -> {
 
             }
-            R.id.nav_share -> {
+            R.id.nav_fav_comics -> {
 
             }
             R.id.nav_send -> {
