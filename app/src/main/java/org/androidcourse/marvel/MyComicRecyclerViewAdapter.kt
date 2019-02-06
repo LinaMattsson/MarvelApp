@@ -8,7 +8,8 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.comic_row.view.*
 import org.androidcourse.testmarvel.dto.Comic
 
-class MyComicRecyclerViewAdapter () : RecyclerView.Adapter<MyComicRecyclerViewAdapter.ViewHolder>() {
+class MyComicRecyclerViewAdapter ()
+    : RecyclerView.Adapter<MyComicRecyclerViewAdapter.ViewHolder>() {
 
     var mValues: List<Comic> = listOf()
 

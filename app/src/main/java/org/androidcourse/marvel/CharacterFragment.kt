@@ -1,21 +1,18 @@
 package org.androidcourse.marvel
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_character.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_character.view.*
 
-import org.androidcourse.marvel.dummy.DummyContent
-import org.androidcourse.marvel.dummy.DummyContent.DummyItem
+
+import org.androidcourse.testmarvel.dto.MarvelCharacter
 
 /**
  * A fragment representing a list of Items.
@@ -44,24 +41,18 @@ class CharacterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-
         val view = inflater.inflate(R.layout.fragment_character, container, false)
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
+        val adapter = MyCharacterRecyclerViewAdapter()
+        view.recyclerView_character.adapter = adapter
+        view.recyclerView_character.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        view.search_character_button.setOnClickListener { _ ->
+            RetrofitClientInstance.service.searchCharacters(view.EditText_search_character.text.toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{ wrapper ->
+                    adapter.mValues = wrapper.data.results
+                    adapter.notifyDataSetChanged()
                 }
-//                recyclerView_character.setBackgroundColor(Color.YELLOW)
-//                recyclerView_character.layoutManager = LinearLayoutManager(this.context)
-//                recyclerView_character.adapter = CharacterAdapter()
-                //adapter = CharacterAdapter()
-
-            }
-            Log.d("test","hej")
         }
         return view
     }
@@ -93,7 +84,7 @@ class CharacterFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: MarvelCharacter)
     }
 
     companion object {
