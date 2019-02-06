@@ -12,7 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import org.androidcourse.marvel.dummy.DummyContent
+import org.androidcourse.testmarvel.dto.MarvelCharacter
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     CharacterFragment.OnListFragmentInteractionListener,
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+    override fun onListFragmentInteraction(item: MarvelCharacter) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
