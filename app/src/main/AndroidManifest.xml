@@ -20,6 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+        android:name=".CharacterDetailActivity"
+        android:label="Character Details"
+        android:launchMode="singleTop">
+        </activity>
     </application>
 
 </manifest>

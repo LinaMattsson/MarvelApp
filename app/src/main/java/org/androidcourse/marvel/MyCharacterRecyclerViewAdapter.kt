@@ -1,5 +1,6 @@
 package org.androidcourse.marvel
 
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -74,7 +75,8 @@ class MyCharacterRecyclerViewAdapter(
         val mContentView: TextView = mView.character_id
         init{
             mView.setOnClickListener {
-
+                val intent = Intent(mView.context, CharacterDetailActivity::class.java)
+            mView.context.startActivity(intent)
             }
 
         }
