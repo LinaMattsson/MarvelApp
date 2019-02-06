@@ -54,6 +54,12 @@ class MyCharacterRecyclerViewAdapter(  private val mValues: List<DummyItem>, pri
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.character_name
         val mContentView: TextView = mView.character_id
+        init{
+            mView.setOnClickListener {
+
+            }
+
+        }
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"
