@@ -1,14 +1,18 @@
 package org.androidcourse.marvel
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_character.*
+import kotlinx.android.synthetic.main.fragment_character.view.*
 
 import org.androidcourse.marvel.dummy.DummyContent
 import org.androidcourse.marvel.dummy.DummyContent.DummyItem
@@ -28,6 +32,9 @@ class CharacterFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
+
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
@@ -37,8 +44,10 @@ class CharacterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_character, container, false)
 
+
+
+        val view = inflater.inflate(R.layout.fragment_character, container, false)
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
@@ -46,8 +55,13 @@ class CharacterFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyCharacterRecyclerViewAdapter(DummyContent.ITEMS, listener)
+//                recyclerView_character.setBackgroundColor(Color.YELLOW)
+//                recyclerView_character.layoutManager = LinearLayoutManager(this.context)
+//                recyclerView_character.adapter = CharacterAdapter()
+                //adapter = CharacterAdapter()
+
             }
+            Log.d("test","hej")
         }
         return view
     }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import kotlinx.android.synthetic.main.character_row.view.*
 
 
 import org.androidcourse.marvel.CharacterFragment.OnListFragmentInteractionListener
@@ -17,9 +18,7 @@ import kotlinx.android.synthetic.main.fragment_character.view.*
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
-class MyCharacterRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
-    private val mListener: OnListFragmentInteractionListener?
+class MyCharacterRecyclerViewAdapter(  private val mValues: List<DummyItem>, private val mListener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<MyCharacterRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
@@ -35,14 +34,14 @@ class MyCharacterRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_character, parent, false)
-        return ViewHolder(view)
+        val cellForRow = view.inflate(R.layout.character_row, parent, false)
+        return ViewHolder(cellForRow)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+        holder.mIdView.text = "lina"
+        holder.mContentView.text = item.name
 
         with(holder.mView) {
             tag = item
@@ -50,11 +49,11 @@ class MyCharacterRecyclerViewAdapter(
         }
     }
 
-    override fun getItemCount(): Int = mValues.size
+    override fun getItemCount(): Int = 4
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+        val mIdView: TextView = mView.character_name
+        val mContentView: TextView = mView.character_id
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"

@@ -1,5 +1,7 @@
 package org.androidcourse.marvel.dummy
 
+import io.reactivex.schedulers.Schedulers
+import org.androidcourse.marvel.RetrofitClientInstance
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -9,6 +11,7 @@ import java.util.HashMap
  *
  * TODO: Replace all uses of this class before publishing your app.
  */
+
 object DummyContent {
 
     /**
@@ -26,8 +29,13 @@ object DummyContent {
     init {
         // Add some sample items.
         for (i in 1..COUNT) {
+            RetrofitClientInstance.service.getAllCharacters()
+                .subscribeOn(Schedulers.io())
+                .subscribe { wrapper ->
+                    println( wrapper.data.results.toString())
+                    addItem(createDummyItem(wrapper.data.results[i].id.toString(), wrapper.data.results[i].name.toString()))
 
-            addItem(createDummyItem(i))
+                }
         }
     }
 
@@ -36,8 +44,8 @@ object DummyContent {
         ITEM_MAP.put(item.id, item)
     }
 
-    private fun createDummyItem(position: Int): DummyItem {
-        return DummyItem(position.toString(), "Item " + position, makeDetails(position))
+    private fun createDummyItem(id: String, name:String): DummyItem {
+        return DummyItem(id, name)
     }
 
     private fun makeDetails(position: Int): String {
@@ -52,7 +60,7 @@ object DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    data class DummyItem(val id: String, val content: String, val details: String) {
-        override fun toString(): String = content
+    data class DummyItem(val id: String, val name: String){
     }
+
 }

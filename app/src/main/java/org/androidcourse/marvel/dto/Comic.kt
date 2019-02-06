@@ -1,4 +1,4 @@
 package org.androidcourse.testmarvel.dto
 
-data class Comic (val resourceURI:String, val name:String){
+data class Comic (val resourceURI:String, val title:String, val id:String){
 }
