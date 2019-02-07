@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.character_row.view.*
@@ -58,13 +59,17 @@ class CharacterDetailActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: DetailCharacterViewHolder, position: Int) {
             var item = result[position]
                 holder.name.text = item.name
-            holder.id.text = item.description
+            holder.description.text = item.description
+            Picasso.with(holder.context).load(item.thumbnail.path+"."+item.thumbnail.extension).into(holder.thumbnail)
 //            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
     }
     private class DetailCharacterViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val name: TextView = view.name_single_View
-        val id: TextView = view.description_single_View
+        val description: TextView = view.description_single_View
+        val context = view.context
+        val thumbnail = view.imageView4
+
     }
 }

@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.character_row.view.*
@@ -60,6 +62,11 @@ class MyCharacterRecyclerViewAdapter(
         holder.mIdView.text = item.name
         holder.mContentView.text = item.id
         holder.item = item
+        val thumbnail = holder.mView.imageView_character_list
+        Picasso.with(holder.mView.context)
+            .load(item.thumbnail.path +"."+ item.thumbnail.extension)
+            .into(thumbnail)
+
 
 
         //Do something to make it posiblie to klick on the listitems
@@ -74,6 +81,7 @@ class MyCharacterRecyclerViewAdapter(
     inner class ViewHolder(val mView: View, var item: MarvelCharacter? = null) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.character_name
         val mContentView: TextView = mView.character_id
+//        val mImageView: ImageView = mView.imageView_character_list
         init{
             mView.setOnClickListener {
                 val intent = Intent(mView.context, CharacterDetailActivity::class.java)
