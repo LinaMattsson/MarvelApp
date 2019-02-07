@@ -56,9 +56,10 @@ class MyCharacterRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
+        var item = mValues[position]
         holder.mIdView.text = item.name
         holder.mContentView.text = item.id
+        holder.item = item
 
 
         //Do something to make it posiblie to klick on the listitems
@@ -70,13 +71,13 @@ class MyCharacterRecyclerViewAdapter(
 
 
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(val mView: View, var item: MarvelCharacter? = null) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.character_name
         val mContentView: TextView = mView.character_id
         init{
             mView.setOnClickListener {
                 val intent = Intent(mView.context, CharacterDetailActivity::class.java)
-                intent.putExtra("charcterId", mView.character_id.toString())
+                intent.putExtra("characterId", item?.id)
             mView.context.startActivity(intent)
             }
 
