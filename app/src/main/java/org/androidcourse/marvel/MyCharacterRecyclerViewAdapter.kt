@@ -76,6 +76,7 @@ class MyCharacterRecyclerViewAdapter(
         init{
             mView.setOnClickListener {
                 val intent = Intent(mView.context, CharacterDetailActivity::class.java)
+                intent.putExtra("charcterId", mView.character_id.toString())
             mView.context.startActivity(intent)
             }
 
