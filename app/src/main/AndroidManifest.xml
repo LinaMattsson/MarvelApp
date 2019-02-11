@@ -29,6 +29,13 @@
             <meta-data android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity"/>
         </activity>
+        <activity
+                android:name=".ComicDetailActivity"
+                android:label="Comic Details"
+                android:launchMode="singleTop">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

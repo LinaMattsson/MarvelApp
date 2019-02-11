@@ -1,5 +1,6 @@
 package org.androidcourse.marvel
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,7 @@ class MyComicRecyclerViewAdapter ()
         var item = mValues[position]
         holder.TitleDisplay.text = item.title
         holder.IdDisplay.text = item.id
+        holder.item = item
 
         Picasso.with(holder.context)
             .load(item.thumbnail.path +"."+ item.thumbnail.extension)
@@ -38,12 +40,18 @@ class MyComicRecyclerViewAdapter ()
 
     }
 
-     inner class ViewHolder (view: View): RecyclerView.ViewHolder(view) {
+     inner class ViewHolder (view: View, var item: Comic? = null): RecyclerView.ViewHolder(view) {
         val TitleDisplay: TextView = view.textView_comic_title
          val IdDisplay: TextView = view.textView_comic_id
          val thumbnail = view.imageView2
          val context = view.context
-
+         init{
+             view.setOnClickListener {
+                 val intent = Intent(view.context, ComicDetailActivity::class.java)
+                 intent.putExtra("comicId", item?.id)
+                 view.context.startActivity(intent)
+             }
+         }
          override fun toString(): String {
              return super.toString() + " '" + TitleDisplay.text + "'"
          }

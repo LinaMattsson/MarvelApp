@@ -16,7 +16,7 @@ import org.androidcourse.testmarvel.dto.MarvelCharacter
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     CharacterFragment.OnListFragmentInteractionListener,
-    ShowSingeCharacterFragment.OnFragmentInteractionListener,
+    //ShowSingeCharacterFragment.OnFragmentInteractionListener,
     ComicFragment.OnFragmentInteractionListener
 {
     override fun onFragmentInteraction(uri: Uri) {
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     lateinit var charactersFragment:CharacterFragment
-    lateinit var showSingeCharacterFragment:ShowSingeCharacterFragment
+    //lateinit var showSingeCharacterFragment:ShowSingeCharacterFragment
     lateinit var comicFragment: ComicFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         charactersFragment = CharacterFragment.newInstance()
-        showSingeCharacterFragment = ShowSingeCharacterFragment.newInstance()
+       // showSingeCharacterFragment = ShowSingeCharacterFragment.newInstance()
         comicFragment = ComicFragment.newInstance()
 
         fab.setOnClickListener { view ->

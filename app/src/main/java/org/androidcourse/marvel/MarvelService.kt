@@ -21,4 +21,7 @@ interface MarvelService {
 
     @GET("characters/{characterId}")
     fun getSingleCharacter(@Path("characterId") characterId:String): Single<CharacterWrapper>
+
+    @GET("comics/{comicId}")
+    fun getSingleComic(@Path("comicId") comicId: String): Single<ComicWrapper>
 }

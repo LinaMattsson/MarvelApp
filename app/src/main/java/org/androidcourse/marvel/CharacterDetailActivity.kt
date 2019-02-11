@@ -28,7 +28,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         setContentView(R.layout.show_single_character)
         //recyclerView_single_character.setBackgroundColor(Color.RED)
         recyclerView_single_character.layoutManager = LinearLayoutManager(this)
-        val adapter =CharacterDetailAdapter()
+        val adapter = CharacterDetailAdapter()
         recyclerView_single_character.adapter = adapter
         val searchId= intent.getStringExtra("characterId")
         RetrofitClientInstance.service.getSingleCharacter(searchId)
@@ -63,7 +63,6 @@ class CharacterDetailActivity : AppCompatActivity() {
             Picasso.with(holder.context).load(item.thumbnail.path+"."+item.thumbnail.extension).into(holder.thumbnail)
 //            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
-
     }
     private class DetailCharacterViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val name: TextView = view.name_single_View
