@@ -17,7 +17,9 @@ import org.androidcourse.testmarvel.dto.MarvelCharacter
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     CharacterFragment.OnListFragmentInteractionListener,
     //ShowSingeCharacterFragment.OnFragmentInteractionListener,
-    ComicFragment.OnFragmentInteractionListener
+    ComicFragment.OnFragmentInteractionListener,
+    FavoriteCharacterFragment.OnFragmentInteractionListener
+
 {
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var charactersFragment:CharacterFragment
     //lateinit var showSingeCharacterFragment:ShowSingeCharacterFragment
     lateinit var comicFragment: ComicFragment
+    lateinit var favoriteCharacterFragment: FavoriteCharacterFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         charactersFragment = CharacterFragment.newInstance()
        // showSingeCharacterFragment = ShowSingeCharacterFragment.newInstance()
         comicFragment = ComicFragment.newInstance()
+        favoriteCharacterFragment = FavoriteCharacterFragment.newInstance()
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -85,6 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
+                
 
             }
             R.id.nav_search_character -> {
@@ -104,7 +109,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .commit()
             }
             R.id.nav_fav_characters -> {
-
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, favoriteCharacterFragment)
+                    .addToBackStack(favoriteCharacterFragment.toString())
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
             }
             R.id.nav_fav_comics -> {
 

@@ -77,7 +77,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         val thumbnail = view.imageView4
 
 
-        var config = RealmConfiguration.Builder().name("characters.realm").build()
+        var config = RealmConfiguration.Builder().name("character.realm").build()
         var realm = Realm.getInstance(config)
 
 
@@ -88,7 +88,8 @@ class CharacterDetailActivity : AppCompatActivity() {
                     val character = realm.createObject(CharacterToRealm::class.java, item?.id)
                     character.name = item?.name
                     character.description = item?.description
-                    character.imageUrl = item?.thumbnail?.extension + "." + item?.thumbnail?.path
+                    character.imagePath = item?.thumbnail?.path.toString()
+                    character.imageExtention = item?.thumbnail?.extension.toString()
                     realm.commitTransaction()
                     Toast.makeText(this.context, "Saved as favorite", Toast.LENGTH_SHORT).show()
                 }
