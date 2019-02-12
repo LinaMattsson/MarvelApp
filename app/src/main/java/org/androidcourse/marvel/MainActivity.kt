@@ -16,11 +16,15 @@ import org.androidcourse.testmarvel.dto.MarvelCharacter
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     CharacterFragment.OnListFragmentInteractionListener,
-    //ShowSingeCharacterFragment.OnFragmentInteractionListener,
     ComicFragment.OnFragmentInteractionListener,
-    FavoriteCharacterFragment.OnFragmentInteractionListener
+    FavoriteCharacterFragment.OnFragmentInteractionListener,
+    AllComicsFragment.OnListFragmentInteractionListener
 
 {
+    override fun onListFragmentInteraction() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var comicFragment: ComicFragment
     lateinit var favoriteCharacterFragment: FavoriteCharacterFragment
     lateinit var mainFragment: MainFragment
+    lateinit var allComicsFragment: AllComicsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         comicFragment = ComicFragment.newInstance()
         favoriteCharacterFragment = FavoriteCharacterFragment.newInstance()
         mainFragment = MainFragment.newInstance()
+        allComicsFragment = AllComicsFragment.newInstance()
 
 
 
@@ -62,7 +68,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.container, mainFragment)
-            .addToBackStack(mainFragment.toString())
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 
@@ -79,15 +84,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_settings -> return true
             else -> return super.onOptionsItemSelected(item)
@@ -134,6 +135,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_send -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, allComicsFragment)
+                    .addToBackStack(allComicsFragment.toString())
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
 
             }
         }
