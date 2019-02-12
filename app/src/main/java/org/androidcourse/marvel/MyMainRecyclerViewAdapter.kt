@@ -46,7 +46,7 @@ class MyMainRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
         holder.mIdView.text = item.name
-        holder.mContentView.text = item.description
+       // holder.mContentView.text = item.description
         holder.item = item
 
         Picasso.with(holder.context)
@@ -63,13 +63,13 @@ class MyMainRecyclerViewAdapter(
 
     inner class ViewHolder(val mView: View, var item: MarvelCharacter? = null) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.textView_all_character_name
-        val mContentView: TextView = mView.textView_all_character_description
+//        val mContentView: TextView = mView.textView_all_character_description
         val mImageView: ImageView = mView.imageView_all_character_image
         val context = mView.context
 
 
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
-        }
+//        override fun toString(): String {
+//            return super.toString() + " '" + mContentView.text + "'"
+//        }
     }
 }

@@ -45,7 +45,7 @@ class MainFragment : Fragment() {
         val adapter = MyMainRecyclerViewAdapter()
         view.recyclerView_all_characters.adapter = adapter
         view.recyclerView_all_characters.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        RetrofitClientInstance.service.getAllCharacters()
+        RetrofitClientInstance.service.getAllCharacters(0)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { wrapper ->
