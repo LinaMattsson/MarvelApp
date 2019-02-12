@@ -26,12 +26,13 @@ class MyMainRecyclerViewAdapter(
 ) : RecyclerView.Adapter<MyMainRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
-    var mValues:List<MarvelCharacter> = listOf()
+    var mValues:MutableList<MarvelCharacter> = mutableListOf()
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-
         }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

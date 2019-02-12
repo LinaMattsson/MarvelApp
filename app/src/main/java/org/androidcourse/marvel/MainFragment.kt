@@ -49,9 +49,29 @@ class MainFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { wrapper ->
-                adapter.mValues = wrapper.data.results
+                adapter.mValues.addAll(wrapper.data.results)
                 adapter.notifyDataSetChanged()
             }
+
+        //var scrollIndex = 0
+        view.recyclerView_all_characters.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (!recyclerView.canScrollVertically(1)) {
+                    //scrollIndex += 20
+                    RetrofitClientInstance.service.getAllCharacters(adapter.mValues.size)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { wrapper ->
+                            adapter.mValues.addAll(wrapper.data.results)
+                            adapter.notifyDataSetChanged()
+                        }
+                    println(adapter.mValues.size.toString() + "AAAAAAAAAAAAAAAAAAA")
+                }
+            }
+        })
+
         return view
     }
 
