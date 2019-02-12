@@ -10,12 +10,16 @@ import android.widget.TextView
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import io.realm.Realm
+import io.realm.RealmConfiguration
 
 
 //import org.androidcourse.marvel.MainFragment.OnListFragmentInteractionListener
 
 import kotlinx.android.synthetic.main.fragment_main.view.*
+import org.androidcourse.marvel.dto.CharacterToRealm
 import org.androidcourse.testmarvel.dto.MarvelCharacter
+import kotlin.coroutines.CoroutineContext
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -47,6 +51,15 @@ class MyMainRecyclerViewAdapter(
         holder.mIdView.text = item.name
        // holder.mContentView.text = item.description
         holder.item = item
+        var config = RealmConfiguration.Builder().name("character.realm").build()
+        var realm = Realm.getInstance(config)
+        var list = realm.where(CharacterToRealm::class.java).findAll()
+        var favorite:Boolean = false
+
+        list.forEach { character -> if(character.id==item.id){favorite=true}}
+        if(!favorite) {
+            holder.star.visibility = View.GONE
+        }
 
         Picasso.with(holder.context)
             .load(item.thumbnail.path +"."+ item.thumbnail.extension)
@@ -65,6 +78,10 @@ class MyMainRecyclerViewAdapter(
 //        val mContentView: TextView = mView.textView_all_character_description
         val mImageView: ImageView = mView.imageView_all_character_image
         val context = mView.context
+        val star = mView.imageButton_star_all_characters
+
+
+
         init {
             mView.setOnClickListener {
                 val intent = Intent(mView.context, CharacterDetailActivity::class.java)

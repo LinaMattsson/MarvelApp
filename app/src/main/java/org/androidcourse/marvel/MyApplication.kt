@@ -11,6 +11,7 @@ class MyApplication: Application() {
         val configuration = RealmConfiguration.Builder()
             .schemaVersion(1)
             .deleteRealmIfMigrationNeeded()
+            .name("character.realm")
             .build()
         Realm.setDefaultConfiguration(configuration)
     }

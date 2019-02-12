@@ -12,6 +12,8 @@ import android.widget.TextView
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.character_row.view.*
 import kotlinx.android.synthetic.main.show_single_character.view.*
 
@@ -20,6 +22,7 @@ import org.androidcourse.marvel.CharacterFragment.OnListFragmentInteractionListe
 
 
 import kotlinx.android.synthetic.main.show_single_character_row.view.*
+import org.androidcourse.marvel.dto.CharacterToRealm
 import org.androidcourse.testmarvel.dto.MarvelCharacter
 
 /**
@@ -67,7 +70,18 @@ class MyCharacterRecyclerViewAdapter(
             .load(item.thumbnail.path +"."+ item.thumbnail.extension)
             .into(thumbnail)
 
+        var realm = Realm.getDefaultInstance()
+        var list = realm.where(CharacterToRealm::class.java).findAll()
+        var favorite:Boolean = false
 
+        list.forEach { character ->
+            if(character.id==item.id){favorite=true}}
+        if(!favorite) {
+            holder.star.visibility = View.GONE
+        }else
+        {
+            holder.star.visibility = View.VISIBLE
+        }
 
         //Do something to make it posiblie to klick on the listitems
 //        with(holder.mView) {
@@ -81,6 +95,7 @@ class MyCharacterRecyclerViewAdapter(
     inner class ViewHolder(val mView: View, var item: MarvelCharacter? = null) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.character_name
         val mContentView: TextView = mView.character_id
+        val star = mView.imageButton_favorite_character
 //        val mImageView: ImageView = mView.imageView_character_list
         init{
             mView.setOnClickListener {
