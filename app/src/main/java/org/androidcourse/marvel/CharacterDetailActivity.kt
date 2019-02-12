@@ -76,13 +76,12 @@ class CharacterDetailActivity : AppCompatActivity() {
         val context = view.context
         val thumbnail = view.imageView4
 
-
         var config = RealmConfiguration.Builder().name("character.realm").build()
         var realm = Realm.getInstance(config)
 
-
         init {
             view.button_add_favorite_character.setOnClickListener {
+
                 try {
                     realm.beginTransaction()
                     val character = realm.createObject(CharacterToRealm::class.java, item?.id)

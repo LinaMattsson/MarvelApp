@@ -31,18 +31,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     lateinit var charactersFragment:CharacterFragment
-    //lateinit var showSingeCharacterFragment:ShowSingeCharacterFragment
     lateinit var comicFragment: ComicFragment
     lateinit var favoriteCharacterFragment: FavoriteCharacterFragment
+    lateinit var mainFragment: MainFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         charactersFragment = CharacterFragment.newInstance()
-       // showSingeCharacterFragment = ShowSingeCharacterFragment.newInstance()
         comicFragment = ComicFragment.newInstance()
         favoriteCharacterFragment = FavoriteCharacterFragment.newInstance()
+        mainFragment = MainFragment.newInstance()
+
+
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -57,7 +59,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, mainFragment)
+            .addToBackStack(mainFragment.toString())
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
 
+        nav_view.setCheckedItem(R.id.nav_home)
         
     }
 
@@ -89,7 +98,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
-                
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, mainFragment)
+                    .addToBackStack(mainFragment.toString())
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
 
             }
             R.id.nav_search_character -> {

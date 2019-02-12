@@ -11,7 +11,7 @@ import retrofit2.http.Query
 interface MarvelService {
 
     @GET("characters")
-    fun getAllCharacters()
+    fun getAllCharacters():Single<CharacterWrapper>
 
     @GET("characters")
     fun searchCharacters(@Query("nameStartsWith") nameStartsWith:String): Single<CharacterWrapper>
