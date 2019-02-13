@@ -39,20 +39,7 @@ class MyCharacterRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
         val cellForRow = view.inflate(R.layout.character_row, parent, false)
-//        cellForRow.linearLayout_character.setOnClickListener { _->
-//           val view = LayoutInflater.from(parent.context)
-//            val newView = view.inflate(R.layout.show_single_character, parent, false)
-//            val adapter = MySingleCharacterAdapter()
-//            newView.recyclerView_single_character.adapter = adapter
-//            newView.recyclerView_single_character.layoutManager = LinearLayoutManager(parent.context, LinearLayout.VERTICAL, false)
-//        RetrofitClientInstance.service.getSingleCharacter(cellForRow.linearLayout_character.character_id.text.toString())
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe{wrapper->
-//                adapter.mValues= wrapper.data.results
-//                adapter.notifyDataSetChanged()
-//            }
-//        }
+
         return ViewHolder(cellForRow)
     }
 
@@ -70,7 +57,8 @@ class MyCharacterRecyclerViewAdapter(
             .load(item.thumbnail.path +"."+ item.thumbnail.extension)
             .into(thumbnail)
 
-        var realm = Realm.getDefaultInstance()
+        var config = RealmConfiguration.Builder().name("character.realm").build()
+        var realm = Realm.getInstance(config)
         var list = realm.where(CharacterToRealm::class.java).findAll()
         var favorite:Boolean = false
 

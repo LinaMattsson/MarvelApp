@@ -8,8 +8,9 @@ import io.realm.annotations.RealmClass
 open class ComicToRealm () :RealmObject(){
     @PrimaryKey
     var id:String= ""
-    var name:String? = null
+    var title:String? = null
     var imagePath:String? = null
-    var imageExtenstion:String? = null
+    var imageExtention:String? = null
     var description:String? = null
+    var resourceURI:String? = null
 }

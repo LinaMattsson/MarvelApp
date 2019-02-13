@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     CharacterFragment.OnListFragmentInteractionListener,
     ComicFragment.OnFragmentInteractionListener,
     FavoriteCharacterFragment.OnFragmentInteractionListener,
-    AllComicsFragment.OnListFragmentInteractionListener
+    AllComicsFragment.OnListFragmentInteractionListener,
+    FavoriteComicFragment.OnListFragmentInteractionListener
 
 {
     override fun onListFragmentInteraction() {
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var favoriteCharacterFragment: FavoriteCharacterFragment
     lateinit var mainFragment: MainFragment
     lateinit var allComicsFragment: AllComicsFragment
+    lateinit var favoriteComicFragment: FavoriteComicFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         favoriteCharacterFragment = FavoriteCharacterFragment.newInstance()
         mainFragment = MainFragment.newInstance()
         allComicsFragment = AllComicsFragment.newInstance()
+        favoriteComicFragment = FavoriteComicFragment.newInstance()
 
 
 
@@ -132,6 +135,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .commit()
             }
             R.id.nav_fav_comics -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, favoriteComicFragment)
+                    .addToBackStack(favoriteComicFragment.toString())
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
 
             }
             R.id.nav_send -> {
