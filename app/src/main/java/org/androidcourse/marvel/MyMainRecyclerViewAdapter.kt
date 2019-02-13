@@ -60,6 +60,9 @@ class MyMainRecyclerViewAdapter(
         if(!favorite) {
             holder.star.visibility = View.GONE
         }
+        else{
+            holder.star.visibility = View.VISIBLE
+        }
 
         Picasso.with(holder.context)
             .load(item.thumbnail.path +"."+ item.thumbnail.extension)
