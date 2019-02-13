@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import io.realm.Realm
+import io.realm.RealmConfiguration
 
 
 import org.androidcourse.marvel.AllComicsFragment.OnListFragmentInteractionListener
 
 import kotlinx.android.synthetic.main.fragment_allcomics.view.*
+import org.androidcourse.marvel.dto.ComicToRealm
 import org.androidcourse.testmarvel.dto.Comic
 
 /**
@@ -43,8 +46,21 @@ class MyAllComicsRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
         holder.mIdView.text = item.title
-        holder.mContentView.text = item.description
+        //holder.mContentView.text = item.description
         holder.item = item
+
+        var config = RealmConfiguration.Builder().name("comic.realm").build()
+        var realm = Realm.getInstance(config)
+        var list = realm.where(ComicToRealm::class.java).findAll()
+        var favorite:Boolean = false
+
+        list.forEach { comic -> if(comic.id==item.id){favorite=true}}
+        if(!favorite) {
+            holder.star.visibility = View.GONE
+        }
+        else{
+            holder.star.visibility = View.VISIBLE
+        }
 
         Picasso.with(holder.context)
             .load(item.thumbnail.path +"."+ item.thumbnail.extension)
@@ -60,9 +76,10 @@ class MyAllComicsRecyclerViewAdapter(
 
     inner class ViewHolder(val mView: View, var item: Comic? = null) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.textView_all_comics_name
-        val mContentView: TextView = mView.textView_all_comics_description
+       // val mContentView: TextView = mView.textView_all_comics_description
         val context = mView.context
         val image: ImageView = mView.imageView_all_comics
+        val star = mView.imageButton_star_allcomics
 
 
         init{
@@ -73,8 +90,8 @@ class MyAllComicsRecyclerViewAdapter(
             }
         }
 
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
-        }
+//        override fun toString(): String {
+//           // return super.toString() + " '" + mContentView.text + "'"
+//        }
     }
 }

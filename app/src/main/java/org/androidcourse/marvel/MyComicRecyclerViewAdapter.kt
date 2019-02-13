@@ -10,7 +10,6 @@ import com.squareup.picasso.Picasso
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.comic_row.view.*
-import org.androidcourse.marvel.dto.CharacterToRealm
 import org.androidcourse.marvel.dto.ComicToRealm
 import org.androidcourse.testmarvel.dto.Comic
 
@@ -58,7 +57,7 @@ class MyComicRecyclerViewAdapter ()
      inner class ViewHolder (view: View, var item: Comic? = null): RecyclerView.ViewHolder(view) {
         val TitleDisplay: TextView = view.textView_comic_title
          val IdDisplay: TextView = view.textView_comic_id
-         val thumbnail = view.imageView_all_comics
+         val thumbnail = view.imageView_search_comics
          val context = view.context
          val star = view.imageButton_star_comic
 

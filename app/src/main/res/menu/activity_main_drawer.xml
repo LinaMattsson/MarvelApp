@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:tools="http://schemas.android.com/tools"
+      xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
                 android:id="@+id/nav_home"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="@string/home"/>
-        <item
-                android:id="@+id/nav_search_character"
                 android:icon="@drawable/ic_menu_gallery"
-                android:title="@string/search_character"/>
-        <item
-                android:id="@+id/nav_search_comics"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="@string/search_series"/>
+                android:title="@string/nav_show_all_characters"/>
         <item
                 android:id="@+id/nav_fav_characters"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="@string/view_favorit_characters"/>
+                android:icon="@android:drawable/btn_star_big_on"
+                android:title="@string/view_favorite_characters"/>
+        <item
+                android:id="@+id/nav_search_character"
+                android:icon="@drawable/ic_search_black_24dp"
+                android:title="@string/nav_search_character"/>
+    </group>
+    <group>
+        <item android:title="@string/nav_show_all_comics" android:id="@+id/nav_all_comics"
+              android:icon="@drawable/ic_menu_gallery"/>
         <item
                 android:id="@+id/nav_fav_comics"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/view_favorit_comics"/>
+                android:icon="@android:drawable/btn_star_big_on"
+                android:title="@string/view_favorite_comics"/>
+        <item
+                android:id="@+id/nav_search_comics"
+                android:icon="@drawable/ic_search_black_24dp"
+                android:title="@string/nav_search_comics"/>
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                    android:id="@+id/nav_send"
-                    android:icon="@drawable/ic_menu_send"
-                    android:title="not used yet"/>
-        </menu>
-    </item>
 
 </menu>
