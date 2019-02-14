@@ -9,7 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import io.realm.Realm
+import io.realm.RealmChangeListener
+import io.realm.RealmConfiguration
+import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_character.view.*
+import org.androidcourse.marvel.dto.CharacterToRealm
 
 
 import org.androidcourse.testmarvel.dto.MarvelCharacter
@@ -21,15 +26,34 @@ import org.androidcourse.testmarvel.dto.MarvelCharacter
  */
 class CharacterFragment : Fragment() {
 
+    var adapter: MyCharacterRecyclerViewAdapter = MyCharacterRecyclerViewAdapter()
+
+    private val realmListener = object: RealmChangeListener<RealmResults<CharacterToRealm>> {
+        override fun onChange(t: RealmResults<CharacterToRealm>) {
+            adapter.notifyDataSetChanged()
+        }
+
+    }
+
     // TODO: Customize parameters
     private var columnCount = 1
+//    var newFavorite:Boolean = false
 
     private var listener: OnListFragmentInteractionListener? = null
 
+//    var update:Boolean = false
+
+    override fun onResume() {
+        super.onResume()
+        // kopiare realm kod
+        var config = RealmConfiguration.Builder().name("character.realm").build()
+        var realm = Realm.getInstance(config)
+        realm.where(CharacterToRealm::class.java).findAll().addChangeListener(realmListener)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
 
 
         arguments?.let {
@@ -42,7 +66,7 @@ class CharacterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_character, container, false)
-        val adapter = MyCharacterRecyclerViewAdapter()
+        //adapter = MyCharacterRecyclerViewAdapter()
         view.recyclerView_character.adapter = adapter
         view.recyclerView_character.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
         view.search_character_button.setOnClickListener { _ ->
@@ -53,7 +77,13 @@ class CharacterFragment : Fragment() {
                     adapter.mValues = wrapper.data.results
                     adapter.notifyDataSetChanged()
                 }
+//            update=true
         }
+//        if(update){
+//            adapter.notifyDataSetChanged()
+//        }
+
+
         return view
     }
 
@@ -100,5 +130,9 @@ class CharacterFragment : Fragment() {
                     putInt(ARG_COLUMN_COUNT, 1)
                 }
             }
+
+//        fun setnewFavorite1(newF: Boolean) {
+//                CharacterFragment.setnewFavorite(newF)
+//        }
     }
 }

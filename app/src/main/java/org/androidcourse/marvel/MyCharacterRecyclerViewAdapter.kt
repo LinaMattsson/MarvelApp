@@ -39,7 +39,6 @@ class MyCharacterRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
         val cellForRow = view.inflate(R.layout.character_row, parent, false)
-
         return ViewHolder(cellForRow)
     }
 
@@ -84,6 +83,7 @@ class MyCharacterRecyclerViewAdapter(
         val mIdView: TextView = mView.character_name
         val mContentView: TextView = mView.character_id
         val star = mView.imageButton_favorite_character
+
 //        val mImageView: ImageView = mView.imageView_character_list
         init{
             mView.setOnClickListener {

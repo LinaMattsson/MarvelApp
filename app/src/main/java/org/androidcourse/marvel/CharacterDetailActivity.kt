@@ -91,6 +91,9 @@ class CharacterDetailActivity : AppCompatActivity() {
                     character.imageExtention = item?.thumbnail?.extension.toString()
                     realm.commitTransaction()
                     Toast.makeText(this.context, "Saved as favorite", Toast.LENGTH_SHORT).show()
+//                    var activity = getAc
+//                    (activity as MainActivity).
+//                    CharacterFragment.setnewFavorite(true)
                 }
                 catch(e:Exception){
                     Toast.makeText(this.context, "Allready a favorite", Toast.LENGTH_SHORT).show()
@@ -98,6 +101,7 @@ class CharacterDetailActivity : AppCompatActivity() {
                 var allCharacters = realm.where(CharacterToRealm::class.java).findAll()
                 allCharacters.forEach{ character -> println(character.name)}
              realm.close()
+
             }
         }
     }
