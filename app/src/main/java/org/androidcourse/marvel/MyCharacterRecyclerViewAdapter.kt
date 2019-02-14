@@ -13,7 +13,9 @@ import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
+import io.realm.RealmChangeListener
 import io.realm.RealmConfiguration
+import io.realm.RealmResults
 import kotlinx.android.synthetic.main.character_row.view.*
 import kotlinx.android.synthetic.main.show_single_character.view.*
 
@@ -34,6 +36,21 @@ class MyCharacterRecyclerViewAdapter(
 ) : RecyclerView.Adapter<MyCharacterRecyclerViewAdapter.ViewHolder>() {
 
     var mValues: List<MarvelCharacter> = listOf()
+
+    val list:RealmResults<CharacterToRealm>
+
+    private val realmListener = object: RealmChangeListener<RealmResults<CharacterToRealm>> {
+        override fun onChange(t: RealmResults<CharacterToRealm>) {
+            notifyDataSetChanged()
+        }
+    }
+
+    init {
+        var config = RealmConfiguration.Builder().name("character.realm").build()
+        var realm = Realm.getInstance(config)
+        list = realm.where(CharacterToRealm::class.java).findAll()
+        list.addChangeListener(realmListener)
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -56,13 +73,12 @@ class MyCharacterRecyclerViewAdapter(
             .load(item.thumbnail.path +"."+ item.thumbnail.extension)
             .into(thumbnail)
 
-        var config = RealmConfiguration.Builder().name("character.realm").build()
-        var realm = Realm.getInstance(config)
-        var list = realm.where(CharacterToRealm::class.java).findAll()
+
         var favorite:Boolean = false
 
         list.forEach { character ->
-            if(character.id==item.id){favorite=true}}
+            if(character.id==item.id){favorite=true}
+        }
         if(!favorite) {
             holder.star.visibility = View.GONE
         }else

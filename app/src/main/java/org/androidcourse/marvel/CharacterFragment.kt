@@ -28,12 +28,7 @@ class CharacterFragment : Fragment() {
 
     var adapter: MyCharacterRecyclerViewAdapter = MyCharacterRecyclerViewAdapter()
 
-    private val realmListener = object: RealmChangeListener<RealmResults<CharacterToRealm>> {
-        override fun onChange(t: RealmResults<CharacterToRealm>) {
-            adapter.notifyDataSetChanged()
-        }
 
-    }
 
     // TODO: Customize parameters
     private var columnCount = 1
@@ -46,9 +41,7 @@ class CharacterFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         // kopiare realm kod
-        var config = RealmConfiguration.Builder().name("character.realm").build()
-        var realm = Realm.getInstance(config)
-        realm.where(CharacterToRealm::class.java).findAll().addChangeListener(realmListener)
+
     }
 
 
@@ -65,6 +58,7 @@ class CharacterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_character, container, false)
         //adapter = MyCharacterRecyclerViewAdapter()
         view.recyclerView_character.adapter = adapter
@@ -79,12 +73,22 @@ class CharacterFragment : Fragment() {
                 }
 //            update=true
         }
+        //var config = RealmConfiguration.Builder().name("character.realm").build()
+        //var realm = Realm.getInstance(config)
+        //realm.where(CharacterToRealm::class.java).findAll().addChangeListener(realmListener)
 //        if(update){
 //            adapter.notifyDataSetChanged()
 //        }
 
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        //var config = RealmConfiguration.Builder().name("character.realm").build()
+        //var realm = Realm.getInstance(config)
+//        realm.where(CharacterToRealm::class.java).findAll().removeAllChangeListeners()
     }
 
     override fun onAttach(context: Context) {
