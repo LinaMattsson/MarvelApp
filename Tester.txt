@@ -1,0 +1,48 @@
+Testning Marvel app
+1. Vid start
+  Karaktärer visas
+  Scrolla till botten, nya karaktärer ska laddas
+  Klicka på en karaktär – individuell info ska visas
+  Klicka på lägg till i favoriter – meddelande blinkar till med ”saved” eller ”allready in favorites”
+  Backa till listan, scrolla bort och tillbaka, så ska stjärnan synas.
+  Gör detta med minst tre karaktärer
+
+2. Välj menyval
+	3. All characters
+	4. Favorite characters
+	5. Search characters
+	6. All comics
+	7. Favorite comics
+	8. Search comics
+
+3. All characters
+  Testa steg 1 igen
+
+4. Favorite characters
+  Kolla så de karaktärer du val är med i listan
+  Klicka på en karaktär för att se individuel info
+
+5. Search characters
+	Skriv in “li” klicka sök
+	Se till att det kommer upp en lista
+  Klicka på en för att få mer info
+  Lägg till den som favorit
+  Backa till listan
+  Kolla så stjärnan dyker upp när du scrollar
+  Sök på ”hu” och gör samma sak igen
+
+6. All comics
+  Gör som steg 1 men med comics
+
+7. Favorite comics
+  Kolla så de serier du val är med i listan
+  Klicka på en serie för att se individuel info
+
+8. Search comics
+  Skriv in “li” klicka sök
+	Se till att det kommer upp en lista
+  Klicka på en för att få mer info
+  Lägg till den som favorit
+  Backa till listan
+  Kolla så stjärnan dyker upp när du scrollar
+  Sök på ”spider” och gör samma sak igen
